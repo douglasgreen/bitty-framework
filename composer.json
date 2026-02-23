@@ -3,7 +3,7 @@
   "_modified": "2026-02-22",
   "name": "douglasgreen/bitty-framework",
   "description": "A small PHP framework",
-  "type": "project",
+  "type": "library",
   "license": "MIT",
   "require": {
     "php": "^8.3"
