@@ -16,9 +16,7 @@ final readonly class Request
      * @param InputData $cookies Wrapper for $_COOKIE
      * @param array<string, FileUpload> $files Processed $_FILES
      */
-    public function __construct(public InputData $query, public InputData $body, public ServerData $server, public InputData $cookies, private array $files = [])
-    {
-    }
+    public function __construct(public InputData $query, public InputData $body, public ServerData $server, public InputData $cookies, private array $files = []) {}
 
     /**
      * Factory method to create Request from PHP superglobals.

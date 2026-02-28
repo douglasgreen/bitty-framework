@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Response;
 
-use Override;
 use InvalidArgumentException;
+use Override;
 
 /**
  * Use correct HTTP methods/semantics.

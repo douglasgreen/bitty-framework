@@ -17,9 +17,7 @@ final readonly class Router
      * @param RouteCollection $routes The defined routes
      * @param string $routeParam The query parameter name used for routing (default 'route')
      */
-    public function __construct(private RouteCollection $routes, private string $routeParam = 'route')
-    {
-    }
+    public function __construct(private RouteCollection $routes, private string $routeParam = 'route') {}
 
     /**
      * Matches the request and dispatches the handler.
