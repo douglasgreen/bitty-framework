@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Response;
 
 /**
- * Standard 3.1.1 (error-handling.md): Context-aware encoding (HTML).
- * Note: Actual escaping of the body content must happen before instantiation 
+ * Note: Actual escaping of the body content must happen before instantiation
  * (typically in the View layer), but this class sets the correct Content-Type.
  */
 final class HtmlResponse extends Response

@@ -28,8 +28,7 @@ final readonly class InputData
     }
 
     /**
-     * Retrieves a raw value. 
-     * Standard 1.2.2 (error-handling.md): SHOULD model data using explicit schemas.
+     * Retrieves a raw value.
      * Use specific typed getters instead where possible.
      */
     public function get(string $key, mixed $default = null): mixed
@@ -39,7 +38,6 @@ final readonly class InputData
 
     /**
      * Retrieves a string value, canonicalized (trimmed).
-     * Standard 2.1.1 (error-handling.md): MUST canonicalize data before validation.
      */
     public function getString(string $key, string $default = ''): string
     {
@@ -48,7 +46,7 @@ final readonly class InputData
         }
 
         $value = $this->data[$key];
-        
+
         // Strict type checking to prevent unexpected behavior
         if (!is_string($value)) {
             throw new InvalidArgumentException(
@@ -62,7 +60,6 @@ final readonly class InputData
 
     /**
      * Retrieves an integer value.
-     * Standard 2.2.1 (error-handling.md): MUST define explicit constraints.
      */
     public function getInt(string $key, int $default = 0): int
     {
@@ -95,7 +92,7 @@ final readonly class InputData
         }
 
         $value = $this->data[$key];
-        
+
         if (is_float($value)) {
             return $value;
         }
@@ -139,7 +136,6 @@ final readonly class InputData
 
     /**
      * Retrieves an array value.
-     * Standard 6.1 (error-handling.md): MUST bound all untrusted inputs.
      */
     public function getArray(string $key, array $default = []): array
     {
@@ -160,7 +156,6 @@ final readonly class InputData
 
     /**
      * Returns all input data as an array.
-     * Standard 14.1.1 (architecture.md): MUST validate all external inputs.
      * Caution: This bypasses type safety guarantees.
      */
     public function all(): array

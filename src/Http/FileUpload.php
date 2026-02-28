@@ -10,8 +10,6 @@ use function move_uploaded_file;
 
 /**
  * Value object for a single uploaded file.
- * Standard 1.1.3 (php.md): Dependencies injected via constructor.
- * Standard 5.1.1 (php.md): Input treated as untrusted.
  */
 final readonly class FileUpload
 {
@@ -32,12 +30,11 @@ final readonly class FileUpload
 
     /**
      * Factory method to create from $_FILES array structure.
-     * 
+     *
      * @param array<string, mixed> $fileData
      */
     public static function fromArray(array $fileData): self
     {
-        // Standard 2.2.2 (error-handling.md): Explicit constraints/fields required.
         $keys = ['name', 'type', 'size', 'tmp_name', 'error'];
         foreach ($keys as $key) {
             if (!array_key_exists($key, $fileData)) {
@@ -56,7 +53,6 @@ final readonly class FileUpload
 
     /**
      * Checks if the file was uploaded successfully.
-     * Standard 4.3.1 (error-handling.md): Fail safe principles.
      */
     public function isValid(): bool
     {

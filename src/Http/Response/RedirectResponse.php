@@ -7,7 +7,7 @@ namespace App\Http\Response;
 use InvalidArgumentException;
 
 /**
- * Standard 11.2.1 (architecture.md): Use correct HTTP methods/semantics.
+ * Use correct HTTP methods/semantics.
  * Redirects strictly use 3xx status codes.
  */
 final class RedirectResponse extends Response
@@ -19,7 +19,6 @@ final class RedirectResponse extends Response
     public function __construct(string $url, int $status = 302)
     {
         if (!filter_var($url, FILTER_VALIDATE_URL) && !str_starts_with($url, '/')) {
-            // Standard 2.3.1 (error-handling.md): Fail-fast on invalid input.
             throw new InvalidArgumentException('Invalid redirect URL provided.');
         }
 
@@ -32,7 +31,6 @@ final class RedirectResponse extends Response
 
     /**
      * Ensures only 3xx codes are used for redirection.
-     * Standard 7.1 (error-handling.md): Correct HTTP status codes.
      */
     protected function validateStatusCode(int $code): void
     {

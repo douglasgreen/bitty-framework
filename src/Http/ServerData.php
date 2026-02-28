@@ -11,7 +11,7 @@ use const FILTER_VALIDATE_IP;
 
 /**
  * Immutable wrapper for $_SERVER superglobal.
- * Standard 1.1.1 (php.md): Separates infrastructure concerns from domain logic.
+ * Separates infrastructure concerns from domain logic.
  */
 final readonly class ServerData
 {
@@ -54,7 +54,6 @@ final readonly class ServerData
 
     /**
      * Retrieves the client IP address.
-     * Standard 14.1.1 (architecture.md): MUST validate all external inputs.
      * Note: Proxies may set HTTP_CLIENT_IP or HTTP_X_FORWARDED_FOR.
      *       Validation is crucial to prevent injection.
      */
@@ -79,7 +78,7 @@ final readonly class ServerData
         // Normalize header name to $_SERVER key format
         // e.g., "Content-Type" -> "HTTP_CONTENT_TYPE"
         $key = 'HTTP_' . strtoupper(str_replace('-', '_', $name));
-        
+
         // Handle Content-Type and Content-Length which might not have HTTP_ prefix in some SAPIs
         if ($name === 'Content-Type') {
              $key = 'CONTENT_TYPE';

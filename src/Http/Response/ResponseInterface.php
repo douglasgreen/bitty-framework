@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Response;
 
 /**
- * Standard 1.3.1 (architecture.md): Defines inputs, outputs, and contracts.
+ * Defines inputs, outputs, and contracts.
  */
 interface ResponseInterface
 {

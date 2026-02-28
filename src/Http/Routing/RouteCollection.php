@@ -7,7 +7,7 @@ namespace App\Http\Routing;
 use InvalidArgumentException;
 
 /**
- * Standard 1.2.1 (php.md): Centralized source of truth for routing.
+ * Centralized source of truth for routing.
  */
 final class RouteCollection
 {
@@ -19,7 +19,7 @@ final class RouteCollection
      */
     public function add(Route $route): void
     {
-        // Standard 2.1.1 (error-handling.md): Validate input constraints.
+        // Validate input constraints.
         if (empty($route->path) || $route->path[0] !== '/') {
             throw new InvalidArgumentException('Route path must start with a forward slash.');
         }

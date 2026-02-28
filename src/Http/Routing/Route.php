@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Routing;
 
 /**
- * Standard 2.2.3 (php.md): Immutable value object for route configuration.
+ * Immutable value object for route configuration.
  */
 final readonly class Route
 {

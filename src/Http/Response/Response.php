@@ -11,7 +11,7 @@ use function in_array;
 use function is_string;
 
 /**
- * Standard 2.2.3 (php.md): Immutable base response using readonly properties.
+ * Immutable base response using readonly properties.
  */
 class Response implements ResponseInterface
 {
@@ -48,7 +48,6 @@ class Response implements ResponseInterface
 
     /**
      * Returns an instance with the specified header.
-     * Standard 1.3 (architecture.md): Immutability enforced.
      */
     public function withHeader(string $name, string|array $value): static
     {
@@ -58,7 +57,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * Standard 4.2.2 (error-handling.md): Must ensure correct HTTP status codes.
+     * Must ensure correct HTTP status codes.
      */
     protected function validateStatusCode(int $code): void
     {
@@ -71,7 +70,6 @@ class Response implements ResponseInterface
 
     /**
      * Sends headers and content to the output buffer.
-     * Standard 5.1 (php.md): Checks headers_sent to prevent runtime errors.
      */
     public function send(): void
     {

@@ -7,7 +7,6 @@ namespace App\Http\Routing;
 use InvalidArgumentException;
 
 /**
- * Standard 3.1 (architecture.md): Explicit contracts.
  * Generates URLs relative to the injected base URL.
  */
 final class UrlGenerator
@@ -22,7 +21,7 @@ final class UrlGenerator
         private string $baseUrl,
         string $routeParam = 'route'
     ) {
-        // Standard 2.1.1 (error-handling.md): Validate data format.
+        // Validate data format.
         if (!filter_var($baseUrl, FILTER_VALIDATE_URL) && !str_starts_with($baseUrl, '/')) {
              // Allow relative base paths for flexibility but warn conceptually
         }
@@ -31,14 +30,14 @@ final class UrlGenerator
 
     /**
      * Generates a URL for a given path.
-     * 
+     *
      * @param string $path The route path (e.g., /user/profile)
      * @param array<string, string> $params Additional query parameters
      * @return string
      */
     public function to(string $path, array $params = []): string
     {
-        // Standard 2.2.1 (error-handling.md): Canonicalization.
+        // Canonicalization.
         if (empty($path) || $path[0] !== '/') {
             throw new InvalidArgumentException('Path must start with a forward slash.');
         }

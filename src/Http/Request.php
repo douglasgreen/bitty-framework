@@ -6,8 +6,6 @@ namespace App\Http;
 
 /**
  * Main Request object encapsulating all PHP superglobals.
- * Standard 1.1.1 (php.md): Separates domain logic from global state.
- * Standard 1.1.3 (php.md): Dependencies injected via constructor.
  */
 final readonly class Request
 {
@@ -44,13 +42,11 @@ final readonly class Request
 
     /**
      * Factory method to create Request from PHP superglobals.
-     * Standard 1.1.2 (php.md): Encapsulates global state access.
-     * 
+     *
      * @return self
      */
     public static function fromGlobals(): self
     {
-        // Standard 2.1.1 (error-handling.md): Canonicalization happens inside InputData.
         return new self(
             query: new InputData($_GET),
             body: new InputData($_POST),
@@ -62,14 +58,14 @@ final readonly class Request
 
     /**
      * Converts the complex $_FILES structure into an array of FileUpload objects.
-     * 
+     *
      * @param array<string, mixed> $rawFiles
      * @return array<string, FileUpload>
      */
     private static function processFiles(array $rawFiles): array
     {
         $processed = [];
-        
+
         foreach ($rawFiles as $key => $data) {
             // Handle single file upload
             if (isset($data['name']) && !is_array($data['name'])) {
@@ -78,8 +74,7 @@ final readonly class Request
             }
 
             // Handle multi-file upload (e.g., name="files[]")
-            // This implementation simplifies complex nested arrays. 
-            // Standard 1.2.1 (error-handling.md): Fail-fast on invalid structure.
+            // This implementation simplifies complex nested arrays.
             if (is_array($data['name'])) {
                 foreach ($data['name'] as $idx => $name) {
                      // Reconstruct flat array structure for each file
@@ -107,7 +102,7 @@ final readonly class Request
 
     /**
      * Retrieves all file uploads.
-     * 
+     *
      * @return array<string, FileUpload>
      */
     public function getFiles(): array

@@ -5,12 +5,12 @@ Here is a step-by-step plan to evolve the current toolkit into a robust microfra
 These components form the bedrock of the application. They are required by almost all other features.
 
 #### Step 1: Dependency Injection (DI) Container
-**Goal**: Manage class dependencies and service lifecycles (Standard 1.1.3 in `php.md`).
+**Goal**: Manage class dependencies and service lifecycles.
 *   **Description**: Currently, we manually instantiate `Router`, `Request`, etc. We need a central container to automate dependency injection, preventing manual `new` instantiation inside business logic.
 *   **Key Components**:
     *   `Container`: Implements PSR-11 (`ContainerInterface`).
     *   `ServiceDefinition`: Defining how services are created (factories vs. autowiring).
-*   **Standard Ref**: **MUST** inject dependencies via constructor; service location is prohibited (Standard 1.1.3, `php.md`).
+*   **Standard Ref**: **MUST** inject dependencies via constructor; service location is prohibited.
 
 #### Step 2: Configuration Management (TOML)
 **Goal**: Externalize configuration and inject it into the container.
@@ -18,7 +18,7 @@ These components form the bedrock of the application. They are required by almos
 *   **Key Components**:
     *   `Config`: An immutable object wrapping parsed TOML data.
     *   `ConfigLoader`: Parses `.toml` files into the `Config` object.
-*   **Standard Ref**: **MUST NOT** commit secrets to repositories; use environment variables or config files (Standard 5.1.2, `php.md`).
+*   **Standard Ref**: **MUST NOT** commit secrets to repositories; use environment variables or config files.
 
 #### Step 3: Logging (PSR-3)
 **Goal**: Establish observability before adding complex logic.
@@ -26,7 +26,7 @@ These components form the bedrock of the application. They are required by almos
 *   **Key Components**:
     *   `Logger`: Implements `Psr\Log\LoggerInterface`.
     *   `LogFormatter`: Standardizes log output (JSON structured logging preferred).
-*   **Standard Ref**: **MUST** emit structured logs (Standard 1.6.1, `architecture.md`); **MUST NOT** contain secrets in logs (Standard 4.3.2, `error-handling.md`).
+*   **Standard Ref**: **MUST** emit structured logs; **MUST NOT** contain secrets in logs.
 
 ---
 
@@ -41,7 +41,7 @@ With the foundation laid, these steps control how the application processes requ
     *   `MiddlewareInterface`: `process(Request, Handler): Response`.
     *   `Pipeline`: Chains middleware execution.
     *   `Runner`: Executes the pipeline.
-*   **Standard Ref**: Cross-cutting concerns **SHOULD** be implemented via middleware (Standard 1.3.2, `php.md`).
+*   **Standard Ref**: Cross-cutting concerns **SHOULD** be implemented via middleware.
 
 #### Step 5: Exception & Error Handling Middleware
 **Goal**: Ensure the application never leaks stack traces or crashes silently.
@@ -49,7 +49,7 @@ With the foundation laid, these steps control how the application processes requ
 *   **Key Components**:
     *   `ErrorHandlerMiddleware`: Wraps the entire application.
     *   `ErrorResponseGenerator`: Maps exceptions to specific HTTP status codes.
-*   **Standard Ref**: **MUST NOT** expose stack traces or secrets in error responses (Standard 4.2.2, `error-handling.md`).
+*   **Standard Ref**: **MUST NOT** expose stack traces or secrets in error responses.
 
 #### Step 6: Event Manager
 **Goal**: Decouple components via the Observer pattern.
@@ -57,7 +57,7 @@ With the foundation laid, these steps control how the application processes requ
 *   **Key Components**:
     *   `EventManager`: Dispatches events to listeners.
     *   `ListenerProvider`: Registers listeners (often via the DI Container).
-*   **Standard Ref**: **MUST** categorize events (Standard 4.1.1, `architecture.md`); **MUST** ensure published events are immutable (Standard 4.1.2, `architecture.md`).
+*   **Standard Ref**: **MUST** categorize events; **MUST** ensure published events are immutable.
 
 ---
 
@@ -71,7 +71,7 @@ These components provide specific capabilities needed by the application logic.
 *   **Key Components**:
     *   `CacheItemPool`: Implements PSR-6.
     *   `FileCache` or `RedisCache`: Concrete storage implementations.
-*   **Standard Ref**: **SHOULD** implement caching with explicit TTLs (Standard 14.2.2, `architecture.md`).
+*   **Standard Ref**: **SHOULD** implement caching with explicit TTLs.
 
 #### Step 8: HTML Templating
 **Goal**: Render secure, accessible HTML views.
@@ -79,7 +79,7 @@ These components provide specific capabilities needed by the application logic.
 *   **Key Components**:
     *   `ViewRenderer`: Renders PHP templates.
     *   `Escaper`: Context-aware escaping (HTML, JS, Attributes).
-*   **Standard Ref**: **MUST** escape HTML output (Standard 5.4.1, `php.md`); **MUST** use semantic HTML (Standard 14.3.1, `architecture.md`).
+*   **Standard Ref**: **MUST** escape HTML output; **MUST** use semantic HTML.
 
 #### Step 9: Notifications
 **Goal**: Send alerts (Email, Slack, etc.) to users or admins.
@@ -87,7 +87,7 @@ These components provide specific capabilities needed by the application logic.
 *   **Key Components**:
     *   `NotifierInterface`: `send(Notification): void`.
     *   `Notification`: A value object representing a message (recipient, subject, body).
-*   **Standard Ref**: **MUST** handle retries and idempotency (Standard 1.5.1, `architecture.md`).
+*   **Standard Ref**: **MUST** handle retries and idempotency.
 
 ---
 
