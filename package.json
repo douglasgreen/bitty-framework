@@ -1,5 +1,5 @@
 {
-  "modified": "2026-02-26",
+  "modified": "2026-02-27",
   "name": "douglasgreen/bitty-framework",
   "version": "1.0.0",
   "description": "A small PHP framework",
@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "npm run lint:md",
     "lint:md": "markdownlint '**/*.md'",
-    "format": "format": "prettier --write . && markdownlint '**/*.md' --fix"
+    "format": "prettier --write . && markdownlint '**/*.md' --fix"
   },
   "devDependencies": {
     "markdownlint-cli": "^0.47.0",
