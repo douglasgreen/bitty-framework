@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http;
 
 use function filter_var;
+
 use const FILTER_FLAG_IPV4;
 use const FILTER_FLAG_IPV6;
 use const FILTER_VALIDATE_IP;
@@ -81,9 +82,9 @@ final readonly class ServerData
 
         // Handle Content-Type and Content-Length which might not have HTTP_ prefix in some SAPIs
         if ($name === 'Content-Type') {
-             $key = 'CONTENT_TYPE';
+            $key = 'CONTENT_TYPE';
         } elseif ($name === 'Content-Length') {
-             $key = 'CONTENT_LENGTH';
+            $key = 'CONTENT_LENGTH';
         }
 
         return $this->serverData[$key] ?? $default;

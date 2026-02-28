@@ -18,8 +18,8 @@ final class HtmlResponse extends Response
     {
         parent::__construct(
             body: $html,
+            headers: ['Content-Type' => 'text/html; charset=utf-8'],
             status: $status,
-            headers: ['Content-Type' => 'text/html; charset=utf-8']
         );
     }
 }

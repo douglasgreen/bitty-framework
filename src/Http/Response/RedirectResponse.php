@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Response;
 
+use Override;
 use InvalidArgumentException;
 
 /**
@@ -23,22 +24,24 @@ final class RedirectResponse extends Response
         }
 
         parent::__construct(
-            body: '', // Redirects typically have empty bodies
+            body: '',
+            headers: ['Location' => $url],
+            // Redirects typically have empty bodies
             status: $status,
-            headers: ['Location' => $url]
         );
     }
 
     /**
      * Ensures only 3xx codes are used for redirection.
      */
+    #[Override]
     protected function validateStatusCode(int $code): void
     {
         parent::validateStatusCode($code);
 
         if ($code < 300 || $code >= 400) {
             throw new InvalidArgumentException(
-                sprintf('Redirect response requires a 3xx status code, %d given.', $code)
+                sprintf('Redirect response requires a 3xx status code, %d given.', $code),
             );
         }
     }

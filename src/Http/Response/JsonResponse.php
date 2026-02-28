@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Response;
 
 use JsonException;
+use RuntimeException;
+
 use function json_encode;
+
 use const JSON_THROW_ON_ERROR;
 
 /**
@@ -21,14 +24,14 @@ final class JsonResponse extends Response
     public function __construct(
         mixed $data,
         int $status = 200,
-        array $headers = []
+        array $headers = [],
     ) {
         // JSON_THROW_ON_ERROR ensures strict compliance and fails fast on invalid data.
         try {
             $body = json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
-        } catch (JsonException $e) {
+        } catch (JsonException $jsonException) {
             // Wrapping in runtime exception to satisfy strict types and fail safely.
-            throw new \RuntimeException('Failed to encode JSON response: ' . $e->getMessage(), 0, $e);
+            throw new RuntimeException('Failed to encode JSON response: ' . $jsonException->getMessage(), 0, $jsonException);
         }
 
         // Force Content-Type to application/json
@@ -51,9 +54,9 @@ final class JsonResponse extends Response
                 'error' => [
                     'code' => $code,
                     'message' => $message,
-                ]
+                ],
             ],
-            $status
+            $status,
         );
     }
 }

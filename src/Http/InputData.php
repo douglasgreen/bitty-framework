@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http;
 
 use InvalidArgumentException;
+
 use function is_array;
 use function is_numeric;
 
@@ -50,7 +51,7 @@ final readonly class InputData
         // Strict type checking to prevent unexpected behavior
         if (!is_string($value)) {
             throw new InvalidArgumentException(
-                sprintf('Input "%s" expected string, got %s', $key, gettype($value))
+                sprintf('Input "%s" expected string, got %s', $key, gettype($value)),
             );
         }
 
@@ -78,7 +79,7 @@ final readonly class InputData
         }
 
         throw new InvalidArgumentException(
-            sprintf('Input "%s" is not a valid integer', $key)
+            sprintf('Input "%s" is not a valid integer', $key),
         );
     }
 
@@ -106,7 +107,7 @@ final readonly class InputData
         }
 
         throw new InvalidArgumentException(
-            sprintf('Input "%s" is not a valid float', $key)
+            sprintf('Input "%s" is not a valid float', $key),
         );
     }
 
@@ -147,7 +148,7 @@ final readonly class InputData
 
         if (!is_array($value)) {
             throw new InvalidArgumentException(
-                sprintf('Input "%s" expected array, got %s', $key, gettype($value))
+                sprintf('Input "%s" expected array, got %s', $key, gettype($value)),
             );
         }
 

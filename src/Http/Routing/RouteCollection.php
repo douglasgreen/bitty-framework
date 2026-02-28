@@ -31,6 +31,7 @@ final class RouteCollection
 
     /**
      * Retrieves all routes.
+     *
      * @return array<string, Route>
      */
     public function all(): array

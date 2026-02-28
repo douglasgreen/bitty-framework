@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http;
 
 use RuntimeException;
+
 use function is_uploaded_file;
 use function move_uploaded_file;
 
@@ -25,7 +26,7 @@ final readonly class FileUpload
         public string $type,
         public int $size,
         public string $tmpName,
-        public int $error
+        public int $error,
     ) {}
 
     /**
@@ -47,7 +48,7 @@ final readonly class FileUpload
             type: (string) $fileData['type'],
             size: (int) $fileData['size'],
             tmpName: (string) $fileData['tmp_name'],
-            error: (int) $fileData['error']
+            error: (int) $fileData['error'],
         );
     }
 

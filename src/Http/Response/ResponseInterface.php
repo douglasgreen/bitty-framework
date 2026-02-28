@@ -16,6 +16,7 @@ interface ResponseInterface
 
     /**
      * Retrieves all response headers.
+     *
      * @return array<string, string|string[]>
      */
     public function getHeaders(): array;

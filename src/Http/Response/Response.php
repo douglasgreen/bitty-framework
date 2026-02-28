@@ -5,29 +5,25 @@ declare(strict_types=1);
 namespace App\Http\Response;
 
 use InvalidArgumentException;
+
 use function header;
 use function headers_sent;
-use function in_array;
-use function is_string;
 
 /**
  * Immutable base response using readonly properties.
  */
 class Response implements ResponseInterface
 {
-    protected readonly string $body;
-
     /**
      * @param string $body The response content
      * @param int $statusCode HTTP status code (100-599)
      * @param array<string, string|string[]> $headers Headers array
      */
     public function __construct(
-        string $body = '',
+        protected readonly string $body = '',
         protected int $statusCode = 200,
-        protected array $headers = []
+        protected array $headers = [],
     ) {
-        $this->body = $body;
         $this->validateStatusCode($statusCode);
     }
 
@@ -57,18 +53,6 @@ class Response implements ResponseInterface
     }
 
     /**
-     * Must ensure correct HTTP status codes.
-     */
-    protected function validateStatusCode(int $code): void
-    {
-        if ($code < 100 || $code > 599) {
-            throw new InvalidArgumentException(
-                sprintf('Invalid HTTP status code: %d', $code)
-            );
-        }
-    }
-
-    /**
      * Sends headers and content to the output buffer.
      */
     public function send(): void
@@ -86,10 +70,22 @@ class Response implements ResponseInterface
         foreach ($this->headers as $name => $values) {
             $values = (array) $values;
             foreach ($values as $value) {
-                header("{$name}: {$value}", false);
+                header(sprintf('%s: %s', $name, $value), false);
             }
         }
 
         echo $this->body;
+    }
+
+    /**
+     * Must ensure correct HTTP status codes.
+     */
+    protected function validateStatusCode(int $code): void
+    {
+        if ($code < 100 || $code > 599) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid HTTP status code: %d', $code),
+            );
+        }
     }
 }

@@ -5,25 +5,20 @@ declare(strict_types=1);
 namespace App\Http\Routing;
 
 use App\Http\Request;
-use App\Http\Response\Response;
 use App\Http\Response\JsonResponse;
+use App\Http\Response\Response;
 
 /**
  * Separates routing logic from request handling.
  */
-final class Router
+final readonly class Router
 {
-    private string $routeParam;
-
     /**
      * @param RouteCollection $routes The defined routes
      * @param string $routeParam The query parameter name used for routing (default 'route')
      */
-    public function __construct(
-        private RouteCollection $routes,
-        string $routeParam = 'route'
-    ) {
-        $this->routeParam = $routeParam;
+    public function __construct(private RouteCollection $routes, private string $routeParam = 'route')
+    {
     }
 
     /**
@@ -44,7 +39,7 @@ final class Router
         // 1. Attempt exact match
         $route = $this->matchRoute($method, $path);
 
-        if ($route) {
+        if ($route instanceof Route) {
             return call_user_func($route->handler, $request);
         }
 
@@ -54,7 +49,7 @@ final class Router
             if ($existingRoute->path === $path) {
                 return new JsonResponse(
                     ['error' => 'Method Not Allowed', 'code' => 'HTTP_405'],
-                    405
+                    405,
                 );
             }
         }
@@ -80,7 +75,7 @@ final class Router
         // 4. Not Found (404)
         return new JsonResponse(
             ['error' => 'Not Found', 'code' => 'HTTP_404'],
-            404
+            404,
         );
     }
 
@@ -99,21 +94,22 @@ final class Router
     private function matchDynamic(string $pattern, string $path): ?array
     {
         // Convert pattern '/user/{id}' to regex '#^/user/([^/]+)$#'
-        if (strpos($pattern, '{') === false) {
+        if (!str_contains($pattern, '{')) {
             return null;
         }
 
-        $regex = '#^' . preg_replace('/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/', '([^/]+)', $pattern) . '$#';
+        $regex = '#^' . preg_replace('/\{([a-zA-Z_]\w*)\}/', '([^/]+)', $pattern) . '$#';
 
         if (preg_match($regex, $path, $matches)) {
             // Extract param names
             $paramNames = [];
-            preg_match_all('/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/', $pattern, $nameMatches);
+            preg_match_all('/\{([a-zA-Z_]\w*)\}/', $pattern, $nameMatches);
 
             $params = [];
             foreach ($nameMatches[1] as $index => $name) {
                 $params[$name] = $matches[$index + 1];
             }
+
             return $params;
         }
 
