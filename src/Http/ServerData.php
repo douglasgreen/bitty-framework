@@ -101,7 +101,7 @@ final readonly class ServerData
     /**
      * Returns the raw server array.
      */
-    public function all(): array
+    public function getAll(): array
     {
         return $this->serverData;
     }
