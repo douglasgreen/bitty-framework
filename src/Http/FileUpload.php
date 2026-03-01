@@ -80,8 +80,10 @@ final readonly class FileUpload
     /**
      * Moves the uploaded file to a new location.
      * Uses move_uploaded_file() for security.
+     *
+     * @throws RuntimeException If the move operation fails.
      */
-    public function moveTo(string $targetPath): bool
+    public function moveTo(string $targetPath): void
     {
         if (!$this->isValid()) {
             throw new RuntimeException('Cannot move invalid file upload: ' . $this->getErrorMessage());
@@ -92,7 +94,9 @@ final readonly class FileUpload
             throw new RuntimeException('Security alert: Attempted move of non-uploaded file.');
         }
 
-        return move_uploaded_file($this->tmpName, $targetPath);
+        if (!move_uploaded_file($this->tmpName, $targetPath)) {
+            throw new RuntimeException(sprintf('Failed to move uploaded file to "%s".', $targetPath));
+        }
     }
 
     /**
