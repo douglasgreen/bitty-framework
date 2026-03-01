@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DouglasGreen\BittyFramework\Http;
+namespace DouglasGreen\BittyFramework\Http;
 
 use RuntimeException;
 
