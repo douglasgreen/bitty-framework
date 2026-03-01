@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Response;
+namespace DouglasGreen\BittyFramework\Http\Response;
 
 use JsonException;
 use RuntimeException;

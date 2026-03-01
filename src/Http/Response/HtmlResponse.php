@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Response;
+namespace DouglasGreen\BittyFramework\Http\Response;
 
 /**
  * Note: Actual escaping of the body content must happen before instantiation

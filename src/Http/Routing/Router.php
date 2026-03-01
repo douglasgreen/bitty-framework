@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Routing;
+namespace DouglasGreen\BittyFramework\Http\Routing;
 
 use App\Http\Request;
 use App\Http\Response\JsonResponse;
