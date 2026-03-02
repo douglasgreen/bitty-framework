@@ -139,6 +139,7 @@ final readonly class InputData
      * Retrieves an array value.
      *
      * @param array<mixed> $default
+     *
      * @return array<mixed>
      */
     public function getArray(string $key, array $default = []): array

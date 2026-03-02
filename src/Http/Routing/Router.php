@@ -100,7 +100,6 @@ final readonly class Router
 
         if (preg_match($regex, $path, $matches)) {
             // Extract param names
-            $paramNames = [];
             preg_match_all('/\{([a-zA-Z_]\w*)\}/', $pattern, $nameMatches);
 
             $params = [];

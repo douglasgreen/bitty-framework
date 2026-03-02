@@ -25,9 +25,9 @@ final class RedirectResponse extends Response
 
         parent::__construct(
             body: '',
-            headers: ['Location' => $url],
             // Redirects typically have empty bodies
             statusCode: $statusCode,
+            headers: ['Location' => $url],
         );
     }
 
