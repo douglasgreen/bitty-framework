@@ -50,7 +50,7 @@ parameters, body data, server information, and file uploads.
 **Creating the Request:**
 
 ```php
-use DouglasGreenBittyFramework\Http\Request;
+use DouglasGreen\BittyFramework\Http\Request;
 
 // Standard 1.1.2: Domain logic depends on wrappers, not superglobals directly.
 $request = Request::fromGlobals();
@@ -91,27 +91,27 @@ determine the path, removing the need for `mod_rewrite` or Nginx configuration.
 **Defining Routes:**
 
 ```php
-use DouglasGreenBittyFramework\Http\Routing\RouteCollection;
-use DouglasGreenBittyFramework\Http\Routing\Route;
+use DouglasGreen\BittyFramework\Http\Routing\RouteCollection;
+use DouglasGreen\BittyFramework\Http\Routing\Route;
 
 $routes = new RouteCollection();
 
 // Simple closure route
 $routes->get('/', function (Request $request) {
-    return new \DouglasGreenBittyFramework\Http\Response\Response('Welcome Home');
+    return new \DouglasGreen\BittyFramework\Http\Response\Response('Welcome Home');
 });
 
 // Route with dynamic parameters
 $routes->get('/user/{id}', function (Request $request, array $params) {
     $userId = $params['id'];
-    return new \DouglasGreenBittyFramework\Http\Response\JsonResponse(['id' => $userId]);
+    return new \DouglasGreen\BittyFramework\Http\Response\JsonResponse(['id' => $userId]);
 });
 ```
 
 **Dispatching:**
 
 ```php
-use DouglasGreenBittyFramework\Http\Routing\Router;
+use DouglasGreen\BittyFramework\Http\Routing\Router;
 
 $router = new Router($routes);
 $response = $router->dispatch($request);
@@ -123,7 +123,7 @@ The `UrlGenerator` requires an injected Base URL, ensuring all generated links a
 correct regardless of the server configuration.
 
 ```php
-use DouglasGreenBittyFramework\Http\Routing\UrlGenerator;
+use DouglasGreen\BittyFramework\Http\Routing\UrlGenerator;
 
 // Inject the base URL (usually from config)
 $urlGenerator = new UrlGenerator('http://localhost:8080/index.php');
@@ -137,9 +137,9 @@ $url = $urlGenerator->to('/user/profile', ['sort' => 'asc']);
 Response objects handle HTTP headers and body formatting. All response objects are immutable.
 
 ```php
-use DouglasGreenBittyFramework\Http\Response\JsonResponse;
-use DouglasGreenBittyFramework\Http\Response\HtmlResponse;
-use DouglasGreenBittyFramework\Http\Response\RedirectResponse;
+use DouglasGreen\BittyFramework\Http\Response\JsonResponse;
+use DouglasGreen\BittyFramework\Http\Response\HtmlResponse;
+use DouglasGreen\BittyFramework\Http\Response\RedirectResponse;
 
 // JSON Response (RFC 8259 compliant)
 $data = ['status' => 'success', 'count' => 42];
@@ -180,12 +180,12 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use DouglasGreenBittyFramework\Http\Request;
-use DouglasGreenBittyFramework\Http\Response\JsonResponse;
-use DouglasGreenBittyFramework\Http\Response\HtmlResponse;
-use DouglasGreenBittyFramework\Http\Routing\RouteCollection;
-use DouglasGreenBittyFramework\Http\Routing\Router;
-use DouglasGreenBittyFramework\Http\Routing\UrlGenerator;
+use DouglasGreen\BittyFramework\Http\Request;
+use DouglasGreen\BittyFramework\Http\Response\JsonResponse;
+use DouglasGreen\BittyFramework\Http\Response\HtmlResponse;
+use DouglasGreen\BittyFramework\Http\Routing\RouteCollection;
+use DouglasGreen\BittyFramework\Http\Routing\Router;
+use DouglasGreen\BittyFramework\Http\Routing\UrlGenerator;
 
 // 1. Configuration
 $baseUrl = 'http://localhost:8080/index.php';

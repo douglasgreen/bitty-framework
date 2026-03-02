@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DouglasGreen\BittyFramework\Http\Routing;
 
-use DouglasGreenBittyFramework\Http\Request;
-use DouglasGreenBittyFramework\Http\Response\JsonResponse;
-use DouglasGreenBittyFramework\Http\Response\Response;
+use DouglasGreen\BittyFramework\Http\Request;
+use DouglasGreen\BittyFramework\Http\Response\JsonResponse;
+use DouglasGreen\BittyFramework\Http\Response\Response;
 
 /**
  * Separates routing logic from request handling.
