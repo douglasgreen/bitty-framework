@@ -137,6 +137,9 @@ final readonly class InputData
 
     /**
      * Retrieves an array value.
+     *
+     * @param array<mixed> $default
+     * @return array<mixed>
      */
     public function getArray(string $key, array $default = []): array
     {
@@ -158,6 +161,8 @@ final readonly class InputData
     /**
      * Returns all input data as an array.
      * Caution: This bypasses type safety guarantees.
+     *
+     * @return array<string, mixed>
      */
     public function all(): array
     {
