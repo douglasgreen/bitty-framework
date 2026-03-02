@@ -14,7 +14,7 @@ final readonly class Request
      * @param InputData $body Wrapper for $_POST
      * @param ServerData $server Wrapper for $_SERVER
      * @param InputData $cookies Wrapper for $_COOKIE
-     * @param array<string, FileUpload> $files Processed $_FILES
+     * @param array<string, FileUpload|array<FileUpload>> $files Processed $_FILES
      */
     public function __construct(public InputData $query, public InputData $body, public ServerData $server, public InputData $cookies, private array $files = []) {}
 
@@ -43,7 +43,7 @@ final readonly class Request
     /**
      * Retrieves all file uploads.
      *
-     * @return array<string, FileUpload>
+     * @return array<string, FileUpload|array<FileUpload>>
      */
     public function getFiles(): array
     {
@@ -55,7 +55,7 @@ final readonly class Request
      *
      * @param array<string, mixed> $rawFiles
      *
-     * @return array<string, FileUpload>
+     * @return array<string, FileUpload|array<FileUpload>>
      */
     private static function processFiles(array $rawFiles): array
     {
@@ -71,6 +71,7 @@ final readonly class Request
             // Handle multi-file upload (e.g., name="files[]")
             // This implementation simplifies complex nested arrays.
             if (is_array($data['name'])) {
+                $processed[$key] = [];
                 foreach ($data['name'] as $idx => $name) {
                     // Reconstruct flat array structure for each file
                     $processed[$key][$idx] = new FileUpload(
