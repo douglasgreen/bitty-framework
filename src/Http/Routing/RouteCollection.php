@@ -34,7 +34,7 @@ final class RouteCollection
      *
      * @return array<string, Route>
      */
-    public function getAll(): array
+    public function all(): array
     {
         return $this->routes;
     }

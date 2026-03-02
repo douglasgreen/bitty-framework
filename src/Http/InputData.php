@@ -159,7 +159,7 @@ final readonly class InputData
      * Returns all input data as an array.
      * Caution: This bypasses type safety guarantees.
      */
-    public function getAll(): array
+    public function all(): array
     {
         return $this->data;
     }
