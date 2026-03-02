@@ -15,9 +15,9 @@ final class RedirectResponse extends Response
 {
     /**
      * @param string $url The URL to redirect to
-     * @param int $status HTTP status code (301, 302, 303, 307, 308)
+     * @param int $statusCode HTTP status code (301, 302, 303, 307, 308)
      */
-    public function __construct(string $url, int $status = 302)
+    public function __construct(string $url, int $statusCode = 302)
     {
         if (!filter_var($url, FILTER_VALIDATE_URL) && !str_starts_with($url, '/')) {
             throw new InvalidArgumentException('Invalid redirect URL provided.');
@@ -27,7 +27,7 @@ final class RedirectResponse extends Response
             body: '',
             headers: ['Location' => $url],
             // Redirects typically have empty bodies
-            status: $status,
+            statusCode: $statusCode,
         );
     }
 

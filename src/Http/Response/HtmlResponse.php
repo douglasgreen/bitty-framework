@@ -12,14 +12,14 @@ final class HtmlResponse extends Response
 {
     /**
      * @param string $html The HTML content (must be already escaped if user-generated)
-     * @param int $status HTTP status code
+     * @param int $statusCode HTTP status code
      */
-    public function __construct(string $html, int $status = 200)
+    public function __construct(string $html, int $statusCode = 200)
     {
         parent::__construct(
             body: $html,
             headers: ['Content-Type' => 'text/html; charset=utf-8'],
-            status: $status,
+            statusCode: $statusCode,
         );
     }
 }

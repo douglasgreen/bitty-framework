@@ -44,6 +44,8 @@ class Response implements ResponseInterface
 
     /**
      * Returns an instance with the specified header.
+     *
+     * @param string|string[] $value
      */
     public function withHeader(string $name, string|array $value): static
     {

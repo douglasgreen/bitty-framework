@@ -34,8 +34,10 @@ final readonly class Request
 
     /**
      * Retrieves a file upload by key.
+     *
+     * @return FileUpload|array<FileUpload>|null
      */
-    public function getFile(string $key): ?FileUpload
+    public function getFile(string $key): FileUpload|array|null
     {
         return $this->files[$key] ?? null;
     }
