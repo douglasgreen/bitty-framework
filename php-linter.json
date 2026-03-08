@@ -1,0 +1,17 @@
+{
+  "ignoreIssues": [
+    "Replace array parameter $fileData with a DTO class. The array is accessed with string keys (name, type, size, tmp_name, error), which suggests a structured data type is more appropriate.",
+    "Rename Method getBool() to sX(), hasX(), etc. or a similar boolean prefix (is, has, can). Methods returning bool should indicate their result via their name.",
+    "Rename Method all() to start with an imperative verb. Method names should describe the action being performed.",
+    "Remove or inline variable \"_GET\" in function \"fromGlobals()\"; it is referenced only once.",
+    "Remove or inline variable \"_POST\" in function \"fromGlobals()\"; it is referenced only once.",
+    "Remove or inline variable \"_SERVER\" in function \"fromGlobals()\"; it is referenced only once.",
+    "Remove or inline variable \"_COOKIE\" in function \"fromGlobals()\"; it is referenced only once.",
+    "Remove or inline variable \"_FILES\" in function \"fromGlobals()\"; it is referenced only once.",
+    "Move superglobal $_GET access out of class Request. Superglobals should only be accessed in the global scope or within classes ending in Controller or Middleware to ensure proper encapsulation.",
+    "Move superglobal $_POST access out of class Request. Superglobals should only be accessed in the global scope or within classes ending in Controller or Middleware to ensure proper encapsulation.",
+    "Move superglobal $_SERVER access out of class Request. Superglobals should only be accessed in the global scope or within classes ending in Controller or Middleware to ensure proper encapsulation.",
+    "Move superglobal $_COOKIE access out of class Request. Superglobals should only be accessed in the global scope or within classes ending in Controller or Middleware to ensure proper encapsulation.",
+    "Move superglobal $_FILES access out of class Request. Superglobals should only be accessed in the global scope or within classes ending in Controller or Middleware to ensure proper encapsulation."
+  ]
+}
